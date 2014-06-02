@@ -47,13 +47,13 @@ add_action( 'added_post_meta', 'get_the_image_delete_cache_by_meta', 10, 2 );
  * @return string|array The HTML for the image. | Image attributes in an array.
  */
 function get_the_image( $args = array() ) {
-	global $_wp_additional_image_sizes;
+	global $_wp_additional_image_sizes, $post;
 
 	/* Set the default arguments. */
 	$defaults = array(
 
 		/* Post the image is associated with. */
-		'post_id'            => get_the_ID(),
+		'post_id'            => ( is_object($post) ? get_the_ID() : 0 ),
 
 		/* Methods of getting an image (in order). */
 		'meta_key'           => array( 'Thumbnail', 'thumbnail' ), // array|string
